@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div class="form">
+		<h2>Отправить форму</h2>
+		<div class="fields">
+			<input id="name" type="text" placeholder="Имя">
+			<input id="phone" type="text" placeholder="+7">
+			<input onclick="submitForm()" type="submit" value="Отправить">
+		</div>
+	</div>
+</body>
+</html>
+
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+		background: linear-gradient(#0E3EDA, #56BBF1);
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.form {
+		width: 300px;
+	}
+
+	.form h2 {
+		color: #fff;
+	}
+
+	.form .fields {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.form .fields input[type="text"] {
+		padding: 10px;
+		border-radius: 5px;
+		border:  1px solid #fff;
+		background: transparent;
+		color: #fff;
+	}
+
+	.form .fields input[type="submit"] {
+		padding: 10px 15px;
+		background: transparent;
+		color:  #fff;
+		font-size: 16px;
+		cursor:  pointer;
+		width: 200px;
+		margin: 0 auto;
+		border: 2px solid #fff;
+		border-radius: 5px;
+		margin-top: 10px;
+	}
+</style>
+
+<script>
+	function submitForm () {
+		let name = document.querySelector('#name').value;
+		let phone = document.querySelector('#phone').value;
+
+		if(!validateName(name)) {
+			alert('Введите имя');
+			return;
+		}
+
+		if(!validatePhone(phone)) {
+			alert('Введите корректный телефон');
+			return;
+		}
+
+		alert('Форма отправлена');
+	}
+
+	function validateName(name) {
+		return name.length > 0;
+	}
+
+	function validatePhone(phone) {
+		const phoneRegex = /^\+?[1-9]\d{6,14}$/;
+		return phoneRegex.test(phone);
+	}
+
+	document.querySelector('#phone').addEventListener('input', (e) => {
+	    let value = e.target.value.replace(/\D/g, '');
+	    e.target.value = '+7' + value.substring(1);
+	})
+</script>
